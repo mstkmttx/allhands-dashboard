@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All-Hands Presenter Tool</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="top-bar">
+    <img src="logo.png" alt="Company Logo" class="logo" />
+    
+    <div class="timer-controls">
+      <div id="timer">00:30</div>
+      <div class="buttons">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slides-container">
+    <!-- Replace with your actual Google Slides embed URL -->
+    <iframe 
+      src="https://docs.google.com/presentation/d/e/2PACX-1vTEMPLATEURL/embed?start=false&loop=false&delayms=3000" 
+      frameborder="0" 
+      allowfullscreen="true" 
+      class="slides"
+    ></iframe>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
