@@ -19,7 +19,18 @@
       </div>
     </div>
   </div>
-
+  <div class="slide-tracker">
+    <input type="number" id="totalSlides" placeholder="Total slides" min="1" />
+    <div class="slide-display">Slide 0 of 0 (0%)</div>
+    <div class="progress-buttons">
+      <button id="prevSlide">◀</button>
+      <button id="nextSlide">▶</button>
+    </div>
+    <div class="progress-bar">
+      <div id="progressFill"></div>
+    </div>
+  </div>
+  
   <div class="slides-container">
     <!-- Replace with your actual Google Slides embed URL -->
     <iframe 
