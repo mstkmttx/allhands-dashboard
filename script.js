@@ -40,37 +40,3 @@ resetBtn.addEventListener("click", () => {
 });
 
 updateDisplay();
-let currentSlide = 0;
-let totalSlides = 0;
-
-const totalSlidesInput = document.getElementById("totalSlides");
-const slideDisplay = document.querySelector(".slide-display");
-const progressFill = document.getElementById("progressFill");
-
-document.getElementById("nextSlide").addEventListener("click", () => {
-  if (currentSlide < totalSlides) {
-    currentSlide++;
-    updateProgressBar();
-  }
-});
-
-document.getElementById("prevSlide").addEventListener("click", () => {
-  if (currentSlide > 0) {
-    currentSlide--;
-    updateProgressBar();
-  }
-});
-
-totalSlidesInput.addEventListener("change", () => {
-  totalSlides = parseInt(totalSlidesInput.value) || 0;
-  if (currentSlide > totalSlides) currentSlide = totalSlides;
-  updateProgressBar();
-});
-
-function updateProgressBar() {
-  if (totalSlides === 0) return;
-
-  const percent = Math.round((currentSlide / totalSlides) * 100);
-  progressFill.style.width = `${percent}%`;
-  slideDisplay.textContent = `Slide ${currentSlide} of ${totalSlides} (${percent}%)`;
-}
