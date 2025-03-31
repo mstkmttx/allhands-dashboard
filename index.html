@@ -14,28 +14,44 @@
       <img src="logo.png" alt="BforeAI Logo" class="logo" />
       <h1>Welcome to BforeAI All Hands 👋</h1>
       <p>Please provide the link to your presentation.</p>
-      <input id="slides-link" type="text" placeholder="Paste Google Slides embed link" />
+      <input id="slides-link" type="text" placeholder="Paste Google Slides link" />
       <button id="start-btn" class="primary-btn">Submit</button>
     </section>
 
-    <!-- Main Presenter View -->
+    <!-- Presenter View -->
     <section id="presenter-view" class="screen hidden">
+
+      <!-- Top Bar -->
       <div class="top-bar">
-        <div class="timer">
-          <span id="countdown">00:30</span>
-          <div class="timer-controls">
-            <button id="start-timer">Start</button>
-            <button id="pause-timer">Pause</button>
-            <button id="reset-timer">Reset</button>
+        <!-- Left: Timer -->
+        <div class="top-section top-left">
+          <div class="timer">
+            <span id="countdown">00:30</span>
+            <div class="timer-controls">
+              <button id="start-timer">Start</button>
+              <button id="pause-timer">Pause</button>
+              <button id="reset-timer">Reset</button>
+            </div>
           </div>
         </div>
-        <button id="qa-btn" class="primary-btn">Start Q&A</button>
+
+        <!-- Center: Logo -->
+        <div class="top-section top-center">
+          <img src="logo.png" alt="BforeAI Logo" class="top-logo" />
+        </div>
+
+        <!-- Right: Q&A Button -->
+        <div class="top-section top-right">
+          <button id="qa-btn" class="primary-btn">Start Q&A</button>
+        </div>
       </div>
 
+      <!-- Google Slides Embed -->
       <div id="slides-container">
         <iframe id="slides-frame" frameborder="0" allowfullscreen></iframe>
       </div>
 
+      <!-- Slido Q&A Section -->
       <div id="qa-section" class="hidden">
         <h2>Live Q&A</h2>
         <iframe
@@ -45,7 +61,8 @@
           allowfullscreen>
         </iframe>
       </div>
-      >
+    </section>
+  </div>
 
   <script src="script.js"></script>
 </body>
