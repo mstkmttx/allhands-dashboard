@@ -3,32 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>All-Hands Presenter Tool</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>BforeAI All Hands</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="top-bar">
-    <img src="logo.png" alt="Company Logo" class="logo" />
-    
-    <div class="timer-controls">
-      <div id="timer">00:30</div>
-      <div class="buttons">
-        <button id="startBtn">Start</button>
-        <button id="pauseBtn">Pause</button>
-        <button id="resetBtn">Reset</button>
-      </div>
-    </div>
-  </div>
+  <div id="app">
 
-  <div class="slides-container">
-    <!-- Replace with your actual Google Slides embed URL -->
-    <iframe 
-      src="https://docs.google.com/presentation/d/e/2PACX-1vSH5zvfCvDoQGlcTZLyEMDV2d9eQOohYzLT83OCZMbefgwvlzf72ILh_rSJ1HsecA/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"" 
-      frameborder="0" 
-      allowfullscreen="true" 
-      class="slides"
-    ></iframe>
-  </div>
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen">
+      <img src="logo.png" alt="BforeAI Logo" class="logo" />
+      <h1>Welcome to BforeAI All Hands 👋</h1>
+      <p>Please provide the link to your presentation.</p>
+      <input id="slides-link" type="text" placeholder="Paste Google Slides embed link" />
+      <button id="start-btn" class="primary-btn">Submit</button>
+    </section>
+
+    <!-- Main Presenter View -->
+    <section id="presenter-view" class="screen hidden">
+      <div class="top-bar">
+        <div class="timer">
+          <span id="countdown">00:30</span>
+          <div class="timer-controls">
+            <button id="start-timer">Start</button>
+            <button id="pause-timer">Pause</button>
+            <button id="reset-timer">Reset</button>
+          </div>
+        </div>
+        <button id="qa-btn" class="primary-btn">Start Q&A</button>
+      </div>
+
+      <div id="slides-container">
+        <iframe id="slides-frame" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div id="qa-section" class="hidden">
+        <h2>Live Q&A</h2>
+        <iframe
+          src="https://wall.sli.do/event/bxXB8kdpNVeDnYqoGrdzUK?section=9c891788-20d1-46ff-80d3-22a3a4584385"
+          id="slido-frame"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      >
 
   <script src="script.js"></script>
 </body>
