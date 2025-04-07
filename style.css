@@ -62,7 +62,7 @@ input[type="text"] {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0.2rem 1rem; /* Üst dikdörtgen inceldi */
+  padding: 0.2rem 1rem;
   margin-bottom: 0.3rem;
   min-height: 60px;
   box-sizing: border-box;
@@ -111,10 +111,10 @@ input[type="text"] {
 
 /* Logo (üstteki) */
 .top-logo {
-  height: 40px; /* Logo büyütüldü */
+  height: 40px;
 }
 
-/* Slayt gösterimi */
+/* Google Slides Embed */
 #slides-container {
   width: 100%;
   max-width: 1400px;
@@ -141,6 +141,38 @@ input[type="text"] {
   height: 500px;
   border-radius: var(--radius);
   border: none;
+}
+
+/* Pre-countdown overlay styling */
+#precountdown {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* Center the element initially */
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  font-weight: bold;
+  color: var(--accent-blue);
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+/* Animation for GO sliding from center to the top left corner */
+@keyframes slideToTimer {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    /* Move from the center (50%/50%) to the top left (0,0)
+       by adding an extra translation of -50vw and -50vh */
+    transform: translate(calc(-50% - 50vw), calc(-50% - 50vh));
+    opacity: 0;
+  }
+}
+
+.slide-go {
+  animation: slideToTimer 1s forwards;
 }
 
 /* Mobil görünüm */
