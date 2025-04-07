@@ -116,9 +116,11 @@ input[type="text"] {
 
 /* Google Slides Embed */
 #slides-container {
+  /* Remove fixed max-width and allow container to fill horizontally */
   width: 100%;
-  max-width: 1400px;
-  height: 80vh;
+  max-width: none;
+  /* Use nearly full viewport height minus the top bar area (adjust as needed) */
+  height: calc(100vh - 80px);
   margin-top: 0.5rem;
 }
 
@@ -148,7 +150,6 @@ input[type="text"] {
   position: fixed;
   top: 50%;
   left: 50%;
-  /* Center the element initially */
   transform: translate(-50%, -50%);
   font-size: 5rem;
   font-weight: bold;
@@ -164,8 +165,6 @@ input[type="text"] {
     opacity: 1;
   }
   100% {
-    /* Move from the center (50%/50%) to the top left (0,0)
-       by adding an extra translation of -50vw and -50vh */
     transform: translate(calc(-50% - 50vw), calc(-50% - 50vh));
     opacity: 0;
   }
@@ -193,6 +192,7 @@ input[type="text"] {
   }
 
   #slides-container {
+    /* Use a bit less height for mobile to ensure everything fits */
     height: 60vh;
   }
 
