@@ -15,15 +15,34 @@
       <h1>Welcome to BforeAI All Hands 👋</h1>
       <p>Please provide the link to your presentation.</p>
       <input id="slides-link" type="text" placeholder="Paste Google Slides link" />
-      <button id="start-btn" class="primary-btn">Submit</button>
+      <button id="start-btn" class="primary-btn">Start Slides</button>
+
+      <hr />
+
+      <p>Or start the Slido presenter:</p>
+      <input id="slido-link" type="text" placeholder="Paste Slido Presenter link" />
+      <button id="start-slido" class="primary-btn">Start Slido</button>
     </section>
 
-    <!-- Presenter View -->
-    <section id="presenter-view" class="screen hidden">
+    <!-- Slido Presenter View -->
+    <section id="slido-view" class="screen hidden">
+      <img src="logo.png" alt="BforeAI Logo" class="logo" />
+      <h1>Pulse Check</h1>
+      <p>Tell us how you’re feeling right now:</p>
+      <iframe
+        id="slido-presenter-frame"
+        src=""
+        frameborder="0"
+        allowfullscreen
+        class="slido-frame">
+      </iframe>
+      <button id="to-slides" class="primary-btn">Proceed to Presentation</button>
+    </section>
 
+    <!-- Slides Presenter View -->
+    <section id="presenter-view" class="screen hidden">
       <!-- Top Bar -->
       <div class="top-bar">
-        <!-- Left: Timer -->
         <div class="top-section top-left">
           <div class="timer">
             <span id="countdown">00:30</span>
@@ -34,13 +53,9 @@
             </div>
           </div>
         </div>
-
-        <!-- Center: Logo -->
         <div class="top-section top-center">
           <img src="logo.png" alt="BforeAI Logo" class="top-logo" />
         </div>
-
-        <!-- Right: Q&A Button -->
         <div class="top-section top-right">
           <button id="qa-btn" class="primary-btn">Start Q&A</button>
         </div>
