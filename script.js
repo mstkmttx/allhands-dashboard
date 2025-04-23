@@ -1,19 +1,19 @@
 // Grab elements
-const slidesLinkInput = document.getElementById("slides-link");
-const startBtn = document.getElementById("start-btn");
-const welcomeScreen = document.getElementById("welcome-screen");
-const presenterView = document.getElementById("presenter-view");
-const slidesFrame = document.getElementById("slides-frame");
-const countdownEl = document.getElementById("countdown");
-const startTimerBtn = document.getElementById("start-timer");
-const pauseTimerBtn = document.getElementById("pause-timer");
-const resetTimerBtn = document.getElementById("reset-timer");
-const qaBtn = document.getElementById("qa-btn");
-const qaSection = document.getElementById("qa-section");
-const precountdownEl = document.getElementById("precountdown");
+const slidesLinkInput  = document.getElementById("slides-link");
+const startBtn         = document.getElementById("start-btn");
+const welcomeScreen    = document.getElementById("welcome-screen");
+const presenterView    = document.getElementById("presenter-view");
+const slidesFrame      = document.getElementById("slides-frame");
+const countdownEl      = document.getElementById("countdown");
+const startTimerBtn    = document.getElementById("start-timer");
+const pauseTimerBtn    = document.getElementById("pause-timer");
+const resetTimerBtn    = document.getElementById("reset-timer");
+const qaBtn            = document.getElementById("qa-btn");
+const qaSection        = document.getElementById("qa-section");
+const precountdownEl   = document.getElementById("precountdown");
 
 // Initialize timer state
-let time = 30;
+let time     = 30;
 let interval = null;
 
 // Update the countdown display
@@ -22,46 +22,49 @@ function updateDisplay() {
 }
 updateDisplay();
 
-// Revised pre-countdown function using recursive setTimeout with "GO" animation
-function startPreCountdown(callback) {
-  let count = 3;
-  function displayNext() {
-    if (count < 0) {
-      // All done; hide the pre-countdown element and call callback
-      precountdownEl.classList.add("hidden");
-      if (callback) callback();
-    } else if (count === 0) {
-      // When count reaches 0, show "GO" and trigger the slide-to-timer animation
+// Pre-countdown: 3→2→1→GO, then callback to start main timer
+function startPreCountdown(cb) {
+  const steps = ["3", "2", "1"];
+  let idx = 0;
+
+  function showNumber() {
+    if (idx < steps.length) {
+      precountdownEl.textContent = steps[idx++];
+      precountdownEl.classList.remove("hidden");
+      precountdownEl.style.opacity = "1";
+
+      // hold ~900ms, fade ~100ms
+      setTimeout(() => {
+        precountdownEl.style.opacity = "0";
+        setTimeout(showNumber, 100);
+      }, 900);
+
+    } else {
+      // show GO
       precountdownEl.textContent = "GO";
       precountdownEl.classList.remove("hidden");
-      precountdownEl.style.opacity = 1;
+      precountdownEl.style.opacity = "1";
       precountdownEl.classList.add("slide-go");
-      // Allow the slide animation to run for 1 second before finishing
+
+      // let slide-go run for 1s, then hide and start main timer
       setTimeout(() => {
         precountdownEl.classList.remove("slide-go");
-        count--; // set to -1 to finish
-        displayNext();
-      }, 1000);
-    } else {
-      // Display the number (3, then 2, then 1) with a fade-out effect
-      precountdownEl.textContent = count;
-      precountdownEl.classList.remove("hidden");
-      precountdownEl.style.opacity = 1;
-      setTimeout(() => {
-        precountdownEl.style.opacity = 0;
+        precountdownEl.style.opacity = "0";
         setTimeout(() => {
-          count--;
-          displayNext();
-        }, 500); // Wait for fade-out to finish
-      }, 500); // Hold the number for 500ms
+          precountdownEl.classList.add("hidden");
+          cb();
+        }, 100);
+      }, 1000);
     }
   }
-  displayNext();
+
+  showNumber();
 }
 
 // Start timer with pre-countdown
 startTimerBtn.addEventListener("click", () => {
-  if (interval !== null) return; // Avoid multiple intervals
+  if (interval !== null) return;
+
   startPreCountdown(() => {
     interval = setInterval(() => {
       if (time > 0) {
@@ -99,16 +102,16 @@ qaBtn.addEventListener("click", () => {
 function convertToEmbedLink(inputUrl) {
   try {
     const url = new URL(inputUrl);
-    if (url.hostname.includes("docs.google.com") && url.pathname.includes("/presentation")) {
-      const idMatch = url.pathname.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      if (idMatch && idMatch[1]) {
-        const id = idMatch[1];
-        return `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000`;
+    if (
+      url.hostname.includes("docs.google.com") &&
+      url.pathname.includes("/presentation")
+    ) {
+      const match = url.pathname.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (match) {
+        return `https://docs.google.com/presentation/d/${match[1]}/embed?start=false&loop=false&delayms=3000`;
       }
     }
-  } catch (e) {
-    return null;
-  }
+  } catch (e) {}
   return null;
 }
 
@@ -124,15 +127,13 @@ function activatePresenterMode(inputUrl) {
   }
 }
 
-// Button click or input paste triggers
+// Show presenter on submit or paste
 startBtn.addEventListener("click", () => {
-  const inputUrl = slidesLinkInput.value.trim();
-  activatePresenterMode(inputUrl);
+  activatePresenterMode(slidesLinkInput.value.trim());
 });
-
 slidesLinkInput.addEventListener("input", () => {
-  const inputUrl = slidesLinkInput.value.trim();
-  if (inputUrl.includes("docs.google.com/presentation")) {
-    activatePresenterMode(inputUrl);
+  const url = slidesLinkInput.value.trim();
+  if (url.includes("docs.google.com/presentation")) {
+    activatePresenterMode(url);
   }
 });

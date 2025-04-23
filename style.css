@@ -29,7 +29,7 @@ body {
 
 /* Welcome ekranındaki logo */
 .logo {
-  width: 150px;
+  width: 350px;
   margin-bottom: 1rem;
 }
 
@@ -62,7 +62,7 @@ input[type="text"] {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem 1rem; /* Üst dikdörtgen inceldi */
   margin-bottom: 0.3rem;
   min-height: 60px;
   box-sizing: border-box;
@@ -111,16 +111,14 @@ input[type="text"] {
 
 /* Logo (üstteki) */
 .top-logo {
-  height: 40px;
+  height: 80px; /* Logo büyütüldü */
 }
 
-/* Google Slides Embed */
+/* Slayt gösterimi */
 #slides-container {
-  /* Remove fixed max-width and allow container to fill horizontally */
   width: 100%;
-  max-width: none;
-  /* Use nearly full viewport height minus the top bar area (adjust as needed) */
-  height: calc(100vh - 80px);
+  max-width: 1400px;
+  height: 80vh;
   margin-top: 0.5rem;
 }
 
@@ -145,35 +143,6 @@ input[type="text"] {
   border: none;
 }
 
-/* Pre-countdown overlay styling */
-#precountdown {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  font-weight: bold;
-  color: var(--accent-blue);
-  z-index: 1000;
-  transition: opacity 0.5s ease;
-}
-
-/* Animation for GO sliding from center to the top left corner */
-@keyframes slideToTimer {
-  0% {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(calc(-50% - 50vw), calc(-50% - 50vh));
-    opacity: 0;
-  }
-}
-
-.slide-go {
-  animation: slideToTimer 1s forwards;
-}
-
 /* Mobil görünüm */
 @media (max-width: 768px) {
   .top-bar {
@@ -192,11 +161,42 @@ input[type="text"] {
   }
 
   #slides-container {
-    /* Use a bit less height for mobile to ensure everything fits */
     height: 60vh;
   }
 
   #slido-frame {
     height: 400px;
   }
+}
+
+/* ——————————————————————————————— */
+/* Pre-Countdown Overlay & “GO” Animation */
+
+#precountdown {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  font-weight: bold;
+  color: var(--accent-blue);
+  z-index: 1000;
+  /* fade duration matches your script’s 100ms */
+  transition: opacity 0.1s ease;
+}
+
+@keyframes slideToTimer {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    /* move from center (50%,50%) to top-left (0,0) */
+    transform: translate(calc(-50% - 50vw), calc(-50% - 50vh));
+    opacity: 0;
+  }
+}
+
+.slide-go {
+  animation: slideToTimer 1s forwards;
 }
